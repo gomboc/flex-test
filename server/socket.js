@@ -14,11 +14,9 @@ var server = net.createServer(	function ( socket ) {
 	
   socket.setEncoding("utf8");
   
-  socket.write(policy() + '\0');
-  
   socket.addListener( "connect", function () {
     
-	  socket.write("connected\0");
+	  socket.write( policy() + '\0' );
 	  
 	  console.log( "connect" );
   } );
