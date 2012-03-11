@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!-- usingas/HelloWorldAS.mxml -->
+<s:Application 
+    xmlns:fx="http://ns.adobe.com/mxml/2009"    
+    xmlns:mx="library://ns.adobe.com/flex/mx"     
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    
+    creationComplete="init()">
+
+    <s:layout> 
+        <s:BasicLayout/> 
+    </s:layout>
+    
+    <fx:Script>
+        <![CDATA[
+        
+        public function init():void {
+
+        }
+        
+        var xmlSocket:XMLSocket = new XMLSocket();
+        
+        public function closeSocket():void {
+        	
+        	xmlSocket.close();
+        }
+        
+        public function connectSocket():void {
+        	
+			xmlSocket.connect( "localhost", 8080 );
+		
+            xmlSocket.addEventListener( DataEvent.DATA, dataHandler );
+        }
+        
+        public function dataHandler( event:DataEvent ):void {
+        
+        	if( event.data.indexOf( "cross-domain-policy" ) == -1 ) {
+        
+        		textarea2.text += event.data + "\n";
+        	}
+        }
+        
+        public function sendData():void {
+        
+        	xmlSocket.send( textarea1.text );
+        	
+    		textarea1.text = "";
+        }
+        
+        ]]>
+    </fx:Script>
+    
+    <s:TextArea id="textarea2" width="200" height="400" x="20" y="20" />
+    
+
+    <s:Panel title="Socket" height="200" width="130" x="230" y="20">
+        <s:TextArea id="textarea1" width="100" height="20" x="5" y="5"/>
+        <s:Button label="Send"
+            click="sendData()" 
+            width="92" 
+            x="10" y="40"/>
+        <s:Button label="Connect"
+            click="connectSocket()" 
+            width="92" 
+            x="10" y="70"/>
+		<s:Button label="Close"
+            click="closeSocket()" 
+            width="92" 
+            x="10" y="100"/>
+    </s:Panel>
+
+</s:Application>
