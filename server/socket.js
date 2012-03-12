@@ -1,4 +1,7 @@
+
 var net = require("net");
+
+var sockets = [];
 
 function policy() {
 	  var xml = '<?xml version="1.0"?>\n<!DOCTYPE cross-domain-policy SYSTEM'
@@ -14,6 +17,8 @@ var server = net.createServer(	function ( socket ) {
 	
   socket.setEncoding("utf8");
   
+  sockets.push( socket );
+  
   socket.addListener( "connect", function () {
     	  
 	  console.log( "connect" );
@@ -22,13 +27,17 @@ var server = net.createServer(	function ( socket ) {
 
   socket.addListener( "data", function ( data ) {
 	  
-	  socket.write( data + "\0" );
+	  for ( var i = 0; i < sockets.length; i++ ) {
+		  sockets[i].write( data + "\0" );
+	  }
 	 	  	    
 	  console.log( data );
   });
   
   
   socket.addListener( "end", function () {
+	  
+	  sockets.splice( sockets.indexOf( socket ), 1 );
 	  
 	  socket.end();
     
