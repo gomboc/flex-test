@@ -51,7 +51,6 @@
     </fx:Script>
     
     <s:TextArea id="textarea2" width="200" height="400" x="20" y="20" />
-    
 
     <s:Panel title="Socket" height="200" width="130" x="230" y="20">
         <s:TextArea id="textarea1" width="100" height="20" x="5" y="5"/>
