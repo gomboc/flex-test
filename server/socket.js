@@ -15,30 +15,20 @@ var server = net.createServer(	function ( socket ) {
   socket.setEncoding("utf8");
   
   socket.addListener( "connect", function () {
-    
-//	  socket.write( policy() + '\0' );
-	  
+    	  
 	  console.log( "connect" );
   } );
   
 
   socket.addListener( "data", function ( data ) {
 	  
-	  if ( data == '<policy-file-request/>\0' ) {
-		  
-	      socket.write( policy() );
-	  } else {
-		  
-		  socket.write( data + "\0" );
-	  }
-	  	    
+	  socket.write( data + "\0" );
+	 	  	    
 	  console.log( data );
   });
   
   
   socket.addListener( "end", function () {
-	  
-	  socket.write("end\0"); 
 	  
 	  socket.end();
     
