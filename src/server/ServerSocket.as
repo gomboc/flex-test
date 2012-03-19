@@ -10,14 +10,14 @@ package server
 	public class ServerSocket
 	{
 		
+		public var appliction:Object;
+		
 		public var domain:String = "localhost";
 	
 		public var port:Number = 8080;
 	
 		public var socket:XMLSocket;
-	
-		public var appliction:Object;
-		
+			
 	
 		public function ServerSocket( app:Object )
 		{
