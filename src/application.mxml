@@ -10,12 +10,28 @@
         <![CDATA[
         
         import server.ServerSocket;
+        import mx.core.UIComponent;
         
         var serverSocket:ServerSocket;
         
+        var ball:UIComponent = new UIComponent();
+        
         public function init():void {
 			serverSocket = new ServerSocket( this );
+						
+			ball.graphics.beginFill(0xff0000);
+			ball.graphics.drawCircle(0, 0, 40);
+			ball.graphics.endFill();
+			ball.x = 50;
+			ball.y = 0;
+			ball.addEventListener(Event.ENTER_FRAME, onEnterFrame);
+			addElement(ball);
         }
+        
+        private function onEnterFrame(event:Event):void {
+			ball.y++;
+		}
+        
                 
         ]]>
     </fx:Script>
